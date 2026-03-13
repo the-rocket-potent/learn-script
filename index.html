@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>포켓몬 포커스 투두</title>
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app-container">
+    <header><div id="mini-calendar"></div></header>
+
+    <div id="category-manager">
+        <input type="text" id="new-cat-name" placeholder="이 날의 새 카테고리...">
+        <button onclick="addCategory()" style="border:none; background:var(--main-color); color:white; border-radius:8px; padding:0 15px; cursor:pointer; font-weight:bold;">추가</button>
+    </div>
+
+<div id="todo-content">
+    <div style="display: flex; align-items: center; justify-content: flex-start; gap: 12px; margin-bottom: 25px;">
+        <span class="selected-date-title" id="view-date" style="margin-bottom: 0;"></span>
+        <button class="btn-today" onclick="goToday()">오늘</button>
+    </div>
+    <div id="category-container"></div>
+</div>
+
+    <div id="input-area">
+        <div class="category-selector" id="cat-selector"></div>
+        <div class="input-group">
+            <input type="text" id="todo-input" placeholder="할 일을 입력하세요">
+            <button onclick="addTodo()" style="background:#333; color:white; border:none; border-radius:12px; padding:0 20px; cursor:pointer; font-weight:bold;">등록</button>
+        </div>
+    </div>
+
+    <div id="battle-overlay" onclick="this.style.display='none'">
+        <img id="poke-img" src="">
+        <h2 id="poke-name"></h2>
+        <p style="color:#888;">도감에 기록되었습니다!</p>
+    </div>
+</div>
+<script src="main.js"></script>
+</body>
