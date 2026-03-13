@@ -76,3 +76,88 @@
         /* 5. 팝업 */
         #battle-overlay { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.97); z-index: 1000; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
         #battle-overlay img { width: 150px; image-rendering: pixelated; }
+
+/* --- 모바일 최적화 미디어 쿼리 --- */
+@media screen and (max-width: 768px) {
+    #app-container {
+        max-width: 100%; /* 화면 꽉 채우기 */
+        height: 100vh;
+        border-radius: 0; /* 모바일은 모서리 둥글게 할 필요 없음 */
+    }
+
+    /* 1. 달력 폰트와 간격 조정 */
+    .fc .fc-toolbar-title {
+        font-size: 1.1rem !important; /* 제목 크기 최적화 */
+    }
+    
+    .fc-daygrid-day-number {
+        font-size: 0.8rem !important;
+        padding: 5px !important;
+    }
+
+    /* 2. 터치하기 편하도록 카테고리 버튼 높이 키우기 */
+    .category-btn {
+        padding: 16px 20px !important;
+        font-size: 1rem !important;
+        border-radius: 16px !important; /* 더 둥글둥글하게 */
+    }
+
+    /* 3. 체크 서클(터치 영역) 확대 */
+    .check-circle {
+        width: 28px !important;
+        height: 28px !important;
+        margin-right: 15px !important;
+    }
+
+    /* 4. 하단 입력바 앱처럼 고정 */
+    #input-area {
+        padding: 15px 15px 30px 15px !important; /* 아이폰 하단 바 고려 */
+        background: #ffffff;
+        box-shadow: 0 -5px 15px rgba(0,0,0,0.03);
+    }
+
+    /* 5. 칩 가로 스크롤 시 부드럽게 */
+    .category-selector {
+        scrollbar-width: none; /* 파이어폭스 */
+        -ms-overflow-style: none; /* IE */
+    }
+    .category-selector::-webkit-scrollbar {
+        display: none; /* 크롬/사파리 스크롤바 숨김 */
+    }
+}
+
+/* 터치 시 반응 효과 (Hover 대신 Active 사용) */
+.category-btn:active, .cat-chip:active, .btn-today:active {
+    transform: scale(0.96);
+    filter: brightness(0.9);
+}
+
+/* 1. 모바일에서 터치 시 생기는 파란색 하이라이트 박스 제거 (웹 느낌 제거) */
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* 2. 날짜 칸 터치(클릭) 시 즉각적인 반응 */
+.fc-daygrid-day:active {
+    background-color: #e9ecef !important; /* 터치하는 순간 색상 변경 */
+    transition: background-color 0.1s;
+}
+
+/* 3. 오늘/선택된 날짜 터치 시 반응 */
+.fc-day-today:active {
+    background-color: #fff3bf !important;
+}
+
+.selected-day:active {
+    background-color: #ffd8a8 !important;
+}
+
+/* 4. '오늘' 버튼과 카테고리 칩 등 모든 버튼류에 쫀득한 터치감 추가 */
+.btn-today:active, 
+.cat-chip:active, 
+.category-btn:active, 
+.check-circle:active {
+    transform: scale(0.92); /* 손가락으로 누르면 살짝 들어가는 느낌 */
+    filter: brightness(0.9); /* 살짝 어두워지며 눌린 표시 */
+    transition: transform 0.1s cubic-bezier(0, 0, 0.2, 1);
+}
